@@ -28,6 +28,7 @@
 </table>
 
 <div>
+    <!-- {{$posts}} -->
 
     {{ $posts->links() }}
 </div>
