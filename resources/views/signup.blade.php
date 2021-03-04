@@ -119,17 +119,18 @@
                 </div>
                 <div class="card-body">
 
-                @if($message=Session::get('error'))
-               <strong style="color:red;">{{$message}}</strong> 
-                @endif
-                @if(count($errors)>0)
-                
-                
-                <ul style="color:red;font-size:12px;">
-                <li>{{$errors}}</li>
-                
-                </ul>
-                @endif
+                    @if($message=Session::get('error'))
+                    <strong style="color:red;">{{$message}}</strong>
+                    @endif
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
                     <form action="register" method="POST">
                         @csrf
                         <div class="input-group form-group">
@@ -158,18 +159,18 @@
                             </div>
                             <input type="password" class="form-control" placeholder=" confirm password" name="con-password">
                         </div>
-                        
+
                         <div class="form-group">
                             <input type="submit" value="Sign up" class="btn float-right login_btn">
                         </div>
                     </form>
                 </div>
                 <div class="card-footer">
-				<div class="d-flex justify-content-center links">
-					Already have an account?<a href="login">Log In</a>
-				</div>
+                    <div class="d-flex justify-content-center links">
+                        Already have an account?<a href="login">Log In</a>
+                    </div>
                 </div>
-               
+
 
             </div>
         </div>

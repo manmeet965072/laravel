@@ -14,7 +14,8 @@ class SignupController extends Controller
         $this->validate($req,[
             'user'=>'required',
             'email'=>'required|email',
-            'password'=>'required|alphaNum|min:3'
+            'password'=>'required|alphaNum|min:3',
+            'con-password' => 'required_with:password|same:password|min:3'
         ]);
         $user=new User();
     $user->name=$req->input('user');
