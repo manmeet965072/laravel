@@ -15,11 +15,13 @@ class PostController extends Controller
     public function index()
     {
         //
-        $posts=Post::with('user')->paginate(10);
-        return view('posts.index')->with([
-            'posts'=>$posts
+        // $posts = Post::with('user')->paginate(10);
+        // return view('posts.index')->with([
+        //     'posts' => $posts
 
-        ]);
+        // ]);
+        $posts=Post::paginate(5);
+        return view('crud',compact('posts'));
     }
 
     /**
@@ -30,6 +32,7 @@ class PostController extends Controller
     public function create()
     {
         //
+        return view('create');
     }
 
     /**
@@ -38,8 +41,15 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+
+
+    public function storeUser(Request $request)
     {
+       // $request->merge(['user_id' => 3]);
+        Post::create($request->all());
+        return redirect('crud')->with('successMsg', 'Post successfully added');
+
+
         //
     }
 
@@ -63,6 +73,8 @@ class PostController extends Controller
     public function edit($id)
     {
         //
+        $post=Post::find($id);
+        return view('edit',compact('post'));
     }
 
     /**
@@ -75,6 +87,13 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $post=Post::find($id);
+        $post->user_id=$request->user_id;
+        $post->name=$request->name;
+        $post->description=$request->description;
+        $post->save();
+
+        return redirect('crud')->with('successMsg', 'Post successfully updated');
     }
 
     /**
@@ -83,8 +102,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
         //
+        Post::find($id)->delete();
+
+        return redirect('crud')->with('successMsg', 'Post successfully deleted');
     }
 }
