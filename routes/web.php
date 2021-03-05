@@ -32,27 +32,27 @@ Route::view("login",'login');
 //Route::view("crud",'crud');
 Route::view("profile",'profile');
 Route::view("signup",'signup');
-// Route::get('/logout', function () {
-//     if(session()->has('user'))
-//     {
-//         session()->pull('user');
+Route::get('/logout', function () {
+    if(session()->has('user'))
+    {
+        session()->pull('user');
 
-//     }
-//     return redirect('login');
-// });
-// Route::get('/login', function () {
-//     if(session()->has('user'))
-//     {
-//         return redirect('profile');
+    }
+    return redirect('login');
+});
+Route::get('/login', function () {
+    if(session()->has('user'))
+    {
+        return redirect('profile');
 
-//     }
-//     return view('login');
-// });
-// Route::get('/register', function () {
-//     if(session()->has('user'))
-//     {
-//         return redirect('profile');
+    }
+    return view('login');
+});
+Route::get('/register', function () {
+    if(session()->has('user'))
+    {
+        return redirect('profile');
 
-//     }
-//     return view('login');
-// });
+    }
+    return view('login');
+});

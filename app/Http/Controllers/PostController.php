@@ -46,6 +46,12 @@ class PostController extends Controller
     public function storeUser(Request $request)
     {
        // $request->merge(['user_id' => 3]);
+       $this->validate($request,[
+        'user_id'=>'required',
+        'name'=>'required',
+        'description'=>'required'
+       
+    ]);
         Post::create($request->all());
         return redirect('crud')->with('successMsg', 'Post successfully added');
 
@@ -87,6 +93,12 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request,[
+            'user_id'=>'required',
+            'name'=>'required',
+            'description'=>'required'
+           
+        ]);
         $post=Post::find($id);
         $post->user_id=$request->user_id;
         $post->name=$request->name;
