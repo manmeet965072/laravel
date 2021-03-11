@@ -162,8 +162,9 @@ Modal Create
                                 <div class="form-group">
                                     <label>User-Id</label>
                                     <div>
-                                        <input name="user_id" type="text" class="form-control" required />
+                                        <input name="user_id" type="hidden" class="form-control" value="{{$post->user_id}}" required />
                                     </div>
+                                    <label >{{$post->user_id}}</label>
                                 </div>
                                 <div class="form-group">
                                     <label>Name</label>
@@ -266,14 +267,16 @@ Modal Create
                                 <div class="form-group">
                                     <label>Id</label>
                                     <div>
-                                        <input name="id" type="text" id="Id" class="form-control"  required />
+                                        <input name="id" type="hidden" id="Id" class="form-control"  required />
                                     </div>
+                                    <label id="idlabel"></label>
                                 </div>
                                 <div class="form-group">
                                     <label>User-Id</label>
                                     <div>
-                                        <input name="user_id" type="text" id="editId" class="form-control" required />
+                                        <input name="user_id" type="hidden" id="editId" class="form-control" required />
                                     </div>
+                                    <label id="userlabel"></label>
                                 </div>
                                 <div class="form-group">
                                     <label>Name</label>
@@ -366,6 +369,8 @@ Modal Create
         selectedRow = td.parentElement.parentElement;
         document.getElementById('Id').value = selectedRow.cells[0].innerHTML;
         document.getElementById('editId').value = selectedRow.cells[1].innerHTML;
+        document.getElementById('idlabel').innerHTML = selectedRow.cells[0].innerHTML;
+        document.getElementById('userlabel').innerHTML = selectedRow.cells[1].innerHTML;
         document.getElementById('editname').value = selectedRow.cells[2].innerHTML;
         document.getElementById('editcontent').value = selectedRow.cells[3].innerHTML;
     }

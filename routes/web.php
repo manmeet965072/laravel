@@ -29,7 +29,7 @@ Auth::routes();
 Route::view('login','auth/login')->name('login');
 Route::view('register','auth/register')->name('register');
 Route::view("dash",'dashboard')->name('dash');
-Route::get("/crud", [PostController::class, 'index'])->name('crud');
+Route::get("/crud/{id}", [PostController::class, 'index'])->name('crud');
 Route::get("show/{id}", [PostController::class, 'show'])->name('details');
 Route::get("create", [PostController::class, 'create'])->name('create');
 //Route::get("show", [PostController::class, 'cre'])->name('create');
@@ -69,13 +69,16 @@ Route::get('/logout', function () {
 });
 Route::get('/login', function () {
     if (session()->has('email')) {
-        return redirect('crud');
+        //return redirect('crud');
+        return back();
     }
     return view('auth/login');
 });
+
 Route::get('/register', function () {
     if (session()->has('email')) {
-        return redirect('crud');
+        //return redirect('crud');
+        return back();
     }
     return view('auth/register');
 });

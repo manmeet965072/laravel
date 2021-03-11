@@ -12,7 +12,7 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
         //
         // $posts = Post::with('user')->paginate(10);
@@ -20,7 +20,8 @@ class PostController extends Controller
         //     'posts' => $posts
 
         // ]);
-        $posts = Post::all();
+        $posts=Post::where('user_id','=',$id)->get();
+        //$posts = Post::all();
         return view('crud', compact('posts'));
     }
 
@@ -53,7 +54,8 @@ class PostController extends Controller
 
         ]);
         Post::create($request->all());
-        return redirect('crud')->with('successMsg', 'Post successfully added');
+        
+        return redirect("crud/$request->user_id")->with('successMsg', 'Post successfully added');
 
 
         //
@@ -86,6 +88,8 @@ class PostController extends Controller
     }
 
     /**
+     * 
+     * 
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -108,7 +112,8 @@ class PostController extends Controller
         $post->description = $request->description;
         $post->save();
 
-        return redirect('crud')->with('successMsg', 'Post successfully updated');
+
+        return redirect("crud/$request->user_id")->with('successMsg', 'Post successfully updated');
     }
 
     /**
@@ -120,8 +125,11 @@ class PostController extends Controller
     public function delete($id)
     {
         //
+        
+        $userId=Post::where('id','=',$id)->get();
         Post::find($id)->delete();
-
-        return redirect('crud')->with('successMsg', 'Post successfully deleted');
+        $userid=$userId[0]->user_id;
+// echo($userid);
+        return redirect("crud/$userid")->with('successMsg', 'Post successfully deleted');
     }
 }

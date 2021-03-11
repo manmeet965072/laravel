@@ -48,7 +48,7 @@ Button trigger modal -->
                         <div class="form-group">
                             <label>User-Id</label>
                             <div>
-                                <input name="user_id" type="text" class="form-control" required/>
+                                <input name="user_id" type="text" class="form-control" value={{}} required/>
                             </div>
                         </div>
                         <div class="form-group">
